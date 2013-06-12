@@ -7,12 +7,23 @@
 //
 
 #import "AppDelegate.h"
+#import "MainViewController.h"
+
+@interface AppDelegate ()
+@property (nonatomic, strong) IBOutlet MainViewController *mainViewController;
+
+@end
 
 @implementation AppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    // Insert code here to initialize your application
+    // Init
+    self.mainViewController = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil];
+    
+    // Add to windows content
+    [self.window.contentView addSubview:self.mainViewController.view];
+    self.mainViewController.view.frame = ((NSView *)self.window.contentView).bounds;
 }
 
 @end

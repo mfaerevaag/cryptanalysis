@@ -13,6 +13,11 @@
 		2878869C1768861200CF41AF /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 2878869A1768861200CF41AF /* Credits.rtf */; };
 		2878869F1768861200CF41AF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2878869E1768861200CF41AF /* AppDelegate.m */; };
 		287886A21768861200CF41AF /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 287886A01768861200CF41AF /* MainMenu.xib */; };
+		287886AE1768876100CF41AF /* Analyzer.m in Sources */ = {isa = PBXBuildFile; fileRef = 287886AD1768876100CF41AF /* Analyzer.m */; };
+		287886B21768879400CF41AF /* Text.txt in Resources */ = {isa = PBXBuildFile; fileRef = 287886B11768879400CF41AF /* Text.txt */; };
+		287886B6176889D900CF41AF /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 287886B4176889D900CF41AF /* MainViewController.m */; };
+		287886B917688A0000CF41AF /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 287886B817688A0000CF41AF /* MainViewController.xib */; };
+		287886BD1768A1F400CF41AF /* Entry.m in Sources */ = {isa = PBXBuildFile; fileRef = 287886BC1768A1F400CF41AF /* Entry.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +34,14 @@
 		2878869D1768861200CF41AF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		2878869E1768861200CF41AF /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		287886A11768861200CF41AF /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		287886AC1768876100CF41AF /* Analyzer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Analyzer.h; path = model/Analyzer.h; sourceTree = "<group>"; };
+		287886AD1768876100CF41AF /* Analyzer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Analyzer.m; path = model/Analyzer.m; sourceTree = "<group>"; };
+		287886B11768879400CF41AF /* Text.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Text.txt; path = model/Text.txt; sourceTree = "<group>"; };
+		287886B3176889D900CF41AF /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainViewController.h; path = controller/MainViewController.h; sourceTree = "<group>"; };
+		287886B4176889D900CF41AF /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainViewController.m; path = controller/MainViewController.m; sourceTree = "<group>"; };
+		287886B817688A0000CF41AF /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainViewController.xib; path = View/MainViewController.xib; sourceTree = "<group>"; };
+		287886BB1768A1F400CF41AF /* Entry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Entry.h; path = model/Entry.h; sourceTree = "<group>"; };
+		287886BC1768A1F400CF41AF /* Entry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Entry.m; path = model/Entry.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,7 +97,9 @@
 			children = (
 				2878869D1768861200CF41AF /* AppDelegate.h */,
 				2878869E1768861200CF41AF /* AppDelegate.m */,
-				287886A01768861200CF41AF /* MainMenu.xib */,
+				287886BA17688B8100CF41AF /* Controller */,
+				287886AF1768876C00CF41AF /* Model */,
+				287886B01768877800CF41AF /* View */,
 				287886921768861200CF41AF /* Supporting Files */,
 			);
 			path = FreqAnalysis;
@@ -100,6 +115,36 @@
 				2878869A1768861200CF41AF /* Credits.rtf */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		287886AF1768876C00CF41AF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				287886B11768879400CF41AF /* Text.txt */,
+				287886AC1768876100CF41AF /* Analyzer.h */,
+				287886AD1768876100CF41AF /* Analyzer.m */,
+				287886BB1768A1F400CF41AF /* Entry.h */,
+				287886BC1768A1F400CF41AF /* Entry.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		287886B01768877800CF41AF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				287886B817688A0000CF41AF /* MainViewController.xib */,
+				287886A01768861200CF41AF /* MainMenu.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		287886BA17688B8100CF41AF /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				287886B3176889D900CF41AF /* MainViewController.h */,
+				287886B4176889D900CF41AF /* MainViewController.m */,
+			);
+			name = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -156,6 +201,8 @@
 				287886961768861200CF41AF /* InfoPlist.strings in Resources */,
 				2878869C1768861200CF41AF /* Credits.rtf in Resources */,
 				287886A21768861200CF41AF /* MainMenu.xib in Resources */,
+				287886B21768879400CF41AF /* Text.txt in Resources */,
+				287886B917688A0000CF41AF /* MainViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -168,6 +215,9 @@
 			files = (
 				287886981768861200CF41AF /* main.m in Sources */,
 				2878869F1768861200CF41AF /* AppDelegate.m in Sources */,
+				287886AE1768876100CF41AF /* Analyzer.m in Sources */,
+				287886B6176889D900CF41AF /* MainViewController.m in Sources */,
+				287886BD1768A1F400CF41AF /* Entry.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -303,6 +353,7 @@
 				287886A71768861200CF41AF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
