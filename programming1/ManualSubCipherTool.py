@@ -9,53 +9,108 @@ def decryption(cipher):
 
 	plaintext = ['-'] * len(cip)
 
-	print len(plaintext)
+	remove_space(plaintext, cip)
 
 	os.system('clear')
 
 	while (not found):
-		print ''.join(cip)
-		print ''.join(plaintext)
+		print "Cipher:    " + ''.join(cip)
+		print "plaintext: " +''.join(plaintext)
 
 		print """What would you like to do? \n1) Assign plaintext to cipher \n2) Unassign plaintext 
 3) Letter frequencies in cipher/english \n4) Most frequent diagrams in cipher/text \n5) Finish decryption"""
 		
-		while True:
-			x = raw_input("Please enter a value: ")
-			try:
-				keyPressed = int(x)
-				if(keyPressed <= 5):
-					break
-				else:
-					print "Wrong input, try again"
-			except:
-				print "Wrong input, try again"
+		keyPressed = int(right_input(5))
 
 		if (keyPressed == 1):
 			assignPlainToCipher(cip, plaintext)
 		elif(keyPressed == 2):
-			unasignPlain(plaintext)	
+			unasignPlain(plaintext)
+		elif(keyPressed == 3):
+			display_letter(cip)
+		elif(keyPressed == 4):
+			display_diagrams(cip)
 		elif(keyPressed == 5):
-			print "Found!"
-			print ''.join(plaintext)
+			print "This is the plaintext you found: " + ''.join(plaintext)
 			found = True
 
 		os.system('clear')
 
 def assignPlainToCipher(cip, plaintext):
 	
-	keyToChange = str(raw_input("What letter do you want to change? "))
-	keyChanged = str(raw_input("What letter do you want to input? "))
+	keyToChange = str(raw_input("What cipher do you want to assign a plain character? ")).upper().isalpha()
+	keyChanged = str(raw_input("What letter do you want to input? ")).lower().isalpha()
 	for x in xrange(0, len(cip)):
 		if(cip[x] == keyToChange):
 			plaintext[x] = keyChanged
 
 def unasignPlain(plaintext):
 	
-	keyToChange = str(raw_input("What letter do you want to change? "))
+	keyToChange = str(raw_input("What plaintext character do you want to unassign? ")).lower().isalpha()
 	for x in xrange(0, len(plaintext)):
 		if(plaintext[x] == keyToChange):
 			plaintext[x] = '-'
+
+def right_input(i):
+
+	while True:
+		x = raw_input("Please enter a value: ")
+		try:
+			keyPressed = int(x)
+			if(keyPressed <= i):
+				break
+			else:
+				print "Wrong input, try again"
+		except:
+			print "Wrong input, try again"
+	return x
+
+def remove_space(plaintext, cip):
+
+	for x in xrange(0,len(cip)):
+		if(cip[x] == ' '):
+			plaintext[x] = ' '
+	
+
+def display_diagrams(cipher):
+
+	input_grams = open("output2.txt", "r")
+	print "English languge frequencies of tri/diagrams:"
+	print ''.join(input_grams.readlines()[:30])
+
+	print "Ciphers frequency of dia/trigrams:"
+	
+
+
+	raw_input("Press any key to continue: ")
+	input_grams.close()
+
+def display_letter(cipher):
+
+	input_frequency = open("output1.txt", "r")
+
+	dict = {}
+	
+	print "Ciphers frequency of letters:"
+	for i in range(0, len(cipher)):
+        	ch = str(''.join(cipher[i:i+1]))
+        		
+		if not ch.isalpha() or len(ch) > 1: continue
+
+       	if ch in dict:
+            dict[ch] += 1
+        else:
+    	    dict[ch] = 1
+            	    
+
+	for key, value in sorted(dict.iteritems()):
+  		print "{0}: {2:.3%}\n".format(key, value, float(value)/float(len(cipher))) 
+
+	print "English languge frequencies of letters:"
+	print ''.join(input_frequency.readlines())
+
+	raw_input("Press any key to continue")
+	input_frequency.close()
 
 if __name__ == '__main__':
 	
@@ -67,21 +122,11 @@ if __name__ == '__main__':
 	print "Press 1) for decryption"
 	print "Press 0) for exit"
 
-	while True:
-		x = raw_input("Please enter a value: ")
-		try:
-			keyPressed = int(x)
-			if(keyPressed <= 1):
-				break
-			else:
-				print "Wrong input, try again"
-		except:
-			print "Wrong input, try again"
-	
+	keyPressed = int(right_input(1))
 
 	if(keyPressed == 0):
 		exit
 	elif(keyPressed == 1):
 		decryption(cipher.upper())
 	else:
-		print "You have entered a wrong key, please try again!"
+		print "Exiting"
