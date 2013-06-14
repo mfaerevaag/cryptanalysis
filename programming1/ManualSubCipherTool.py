@@ -94,17 +94,17 @@ def display_letter(cipher):
 	print "Ciphers frequency of letters:"
 	for i in range(0, len(cipher)):
         	ch = str(''.join(cipher[i:i+1]))
-        		
+                
 		if not ch.isalpha() or len(ch) > 1: continue
 
-       	if ch in dict:
-            dict[ch] += 1
-        else:
-    	    dict[ch] = 1
-            	    
+                if ch in dict:
+                        dict[ch] += 1
+                else:
+                        dict[ch] = 1
+                
 
 	for key, value in sorted(dict.iteritems()):
-  		print "{0}: {2:.3%}\n".format(key, value, float(value)/float(len(cipher))) 
+  		print "{0}: {2:.3%}".format(key, value, float(value)/float(len(cipher))) 
 
 	print "English languge frequencies of letters:"
 	print ''.join(input_frequency.readlines())
