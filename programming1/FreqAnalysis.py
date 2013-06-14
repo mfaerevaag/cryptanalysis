@@ -22,9 +22,14 @@ for line in input:
                 
             total[0 if len(ch) < 2 else 1] += 1
 
+# Monograms
 for key in sorted(dict.keys()):
-    file = output2 if len(key) > 1 else output1
-    idx = 0 if len(key) < 1 else 1
-    file.write("{0}: {1} ({2:.3%})\n".format(key, dict[key], 
-                                         float(dict[key])/float(total[idx])))
+    if len(key) > 1: continue
+    output1.write("{0}: {2:.3%}\n".format(key, dict[key], 
+                                         float(dict[key])/float(total[0])))
 
+# Di- and trigrams
+for key, value in sorted(dict.iteritems(), key=lambda (k,v): (v,k), reverse=True):
+    if len(key) <= 1: continue
+    output2.write("{0}: {2:.3%}\n".format(key, value, 
+                                         float(value)/float(total[0])))
