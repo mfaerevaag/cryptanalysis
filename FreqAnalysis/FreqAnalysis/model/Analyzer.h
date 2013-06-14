@@ -7,14 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Entry.h"
 
 @interface Analyzer : NSObject
 
-@property (readonly, copy) NSMutableArray *entries; // of FrequencyEntries
+@property (readonly, nonatomic) NSMutableDictionary *entries;
 
 - (void) analyzeContent: (NSString *)content;
-
-- (void) addEntry: (Entry *)entry;
 
 @end

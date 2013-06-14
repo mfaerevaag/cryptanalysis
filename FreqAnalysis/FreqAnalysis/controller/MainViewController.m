@@ -8,30 +8,22 @@
 
 #import "MainViewController.h"
 #import "Analyzer.h"
+#import "Entry.h"
 
 #define CYPHERTEXT_FILE @"Text"
 
 @interface MainViewController ()
 @property (copy) NSString *text;
-@property Analyzer *analyzer;
+@property Analyzer *freqAnalyzer;
 
+@property (weak) IBOutlet NSProgressIndicator *progIndicator;
+@property (weak) IBOutlet NSTableView *table;
 
 @end
 
 @implementation MainViewController
 
-@synthesize analyzer = _analyzer,
-text = _text;
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        _analyzer = [[Analyzer alloc] init];
-    }
-    
-    return self;
-}
+@synthesize freqAnalyzer, text, progIndicator, table = _table;
 
 - (IBAction)analyze:(id)sender
 {
@@ -43,7 +35,56 @@ text = _text;
                                                  error:NULL];
     }
     
-    [self.analyzer analyzeContent:self.text];
+    [self.progIndicator setHidden:NO];
+    [self.progIndicator startAnimation:nil];
+    [sender setEnabled:NO];
+    dispatch_queue_t queue = dispatch_queue_create("queue", 0);
+    dispatch_async(queue, ^{
+        
+        [self.freqAnalyzer analyzeContent:self.text];
+        
+        // Fire UI commands in main thread
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [self.progIndicator setHidden:YES];
+            [self.progIndicator stopAnimation:nil];
+            [sender setEnabled:YES];
+            NSLog(@"RELOAD");
+            [_table reloadData];
+        });
+    });
+}
+
+- (NSInteger) numberOfRowsInTableView: (NSTableView *)tableView
+{
+    NSLog(@"HELLO ROWS");
+    return [self.freqAnalyzer.entries count];
+}
+
+- (NSView *) tableView: (NSTableView *)tableView
+    viewForTableColumn: (NSTableColumn *)tableColumn
+                   row: (NSInteger)row
+{
+    
+    NSString *key = [[self.freqAnalyzer.entries allKeys] objectAtIndex:row];
+    Entry *entry = [self.freqAnalyzer.entries objectForKey:key];
+    
+    NSLog(@"HELLO");
+    NSLog(@"%@", tableColumn.value);
+    
+    NSString *identifier = [tableColumn identifier];
+    NSTextField *textField = [tableView makeViewWithIdentifier:identifier owner:self];
+    
+    if ([identifier isEqualToString:@"Value"]) {
+        textField.objectValue = entry.value;
+    } else if ([identifier isEqualToString:@"Type"]) {
+        textField.objectValue = [Entry typeToString:entry.type];
+    } else if ([identifier isEqualToString:@"Occurences"]) {
+        textField.objectValue = [NSString stringWithFormat:@"%lu", (unsigned long)entry.occurences];
+    } else if ([identifier isEqualToString:@"Frequency"]) {
+        textField.objectValue = entry.frequency;
+    }
+    
+    return textField;
 }
 
 @end

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2815158D1769CD07001AA61C /* Entry.m in Sources */ = {isa = PBXBuildFile; fileRef = 2815158C1769CD07001AA61C /* Entry.m */; };
 		2878868C1768861200CF41AF /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2878868B1768861200CF41AF /* Cocoa.framework */; };
 		287886961768861200CF41AF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 287886941768861200CF41AF /* InfoPlist.strings */; };
 		287886981768861200CF41AF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 287886971768861200CF41AF /* main.m */; };
@@ -17,10 +18,11 @@
 		287886B21768879400CF41AF /* Text.txt in Resources */ = {isa = PBXBuildFile; fileRef = 287886B11768879400CF41AF /* Text.txt */; };
 		287886B6176889D900CF41AF /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 287886B4176889D900CF41AF /* MainViewController.m */; };
 		287886B917688A0000CF41AF /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 287886B817688A0000CF41AF /* MainViewController.xib */; };
-		287886BD1768A1F400CF41AF /* Entry.m in Sources */ = {isa = PBXBuildFile; fileRef = 287886BC1768A1F400CF41AF /* Entry.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2815158B1769CD07001AA61C /* Entry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Entry.h; path = model/Entry.h; sourceTree = "<group>"; };
+		2815158C1769CD07001AA61C /* Entry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Entry.m; path = model/Entry.m; sourceTree = "<group>"; };
 		287886881768861200CF41AF /* FreqAnalysis.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FreqAnalysis.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2878868B1768861200CF41AF /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		2878868E1768861200CF41AF /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -40,8 +42,6 @@
 		287886B3176889D900CF41AF /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainViewController.h; path = controller/MainViewController.h; sourceTree = "<group>"; };
 		287886B4176889D900CF41AF /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainViewController.m; path = controller/MainViewController.m; sourceTree = "<group>"; };
 		287886B817688A0000CF41AF /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainViewController.xib; path = View/MainViewController.xib; sourceTree = "<group>"; };
-		287886BB1768A1F400CF41AF /* Entry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Entry.h; path = model/Entry.h; sourceTree = "<group>"; };
-		287886BC1768A1F400CF41AF /* Entry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Entry.m; path = model/Entry.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,8 +123,8 @@
 				287886B11768879400CF41AF /* Text.txt */,
 				287886AC1768876100CF41AF /* Analyzer.h */,
 				287886AD1768876100CF41AF /* Analyzer.m */,
-				287886BB1768A1F400CF41AF /* Entry.h */,
-				287886BC1768A1F400CF41AF /* Entry.m */,
+				2815158B1769CD07001AA61C /* Entry.h */,
+				2815158C1769CD07001AA61C /* Entry.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -217,7 +217,7 @@
 				2878869F1768861200CF41AF /* AppDelegate.m in Sources */,
 				287886AE1768876100CF41AF /* Analyzer.m in Sources */,
 				287886B6176889D900CF41AF /* MainViewController.m in Sources */,
-				287886BD1768A1F400CF41AF /* Entry.m in Sources */,
+				2815158D1769CD07001AA61C /* Entry.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
