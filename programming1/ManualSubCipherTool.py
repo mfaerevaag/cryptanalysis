@@ -1,6 +1,7 @@
 from sys import argv
 import os
 
+
 def decryption(cipher):
 
 	found = False
