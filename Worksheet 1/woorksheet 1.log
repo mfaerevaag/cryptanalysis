@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  13 JUN 2013 14:09
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  16 JUN 2013 23:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1161,7 +1161,49 @@ LaTeX Info: Redefining \nameref on input line 116.
 \@outlinefile=\write4
 \openout4 = `"woorksheet 1.out"'.
 
- [1.1{/usr/local/texlive/2012/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+LaTeX Font Info:    Try loading font information for OT1+pxr on input line 119.
+
+
+(/usr/local/texlive/2012/texmf-dist/tex/latex/pxfonts/ot1pxr.fd
+File: ot1pxr.fd 2000/12/14 v1.0
+)
+LaTeX Font Info:    Try loading font information for U+esvect on input line 119
+.
+
+(/usr/local/texlive/2012/texmf-dist/tex/latex/esvect/uesvect.fd
+File: uesvect.fd 
+)
+LaTeX Font Info:    Try loading font information for U+pxsya on input line 119.
+
+
+(/usr/local/texlive/2012/texmf-dist/tex/latex/pxfonts/upxsya.fd
+File: upxsya.fd 2000/12/14 v1.0
+)
+LaTeX Font Info:    Try loading font information for U+pxsyb on input line 119.
+
+
+(/usr/local/texlive/2012/texmf-dist/tex/latex/pxfonts/upxsyb.fd
+File: utxsyb.fd 2000/12/14 v1.0
+)
+LaTeX Font Info:    Try loading font information for U+pxmia on input line 119.
+
+
+(/usr/local/texlive/2012/texmf-dist/tex/latex/pxfonts/upxmia.fd
+File: upxmia.fd 2000/12/14 v1.0
+)
+LaTeX Font Info:    Try loading font information for U+pxsyc on input line 119.
+
+
+(/usr/local/texlive/2012/texmf-dist/tex/latex/pxfonts/upxsyc.fd
+File: upxsyc.fd 2000/12/14 v1.0
+)
+Overfull \hbox (40.6691pt too wide) in paragraph at lines 121--122
+\T1/pxr/m/n/12 few seconds of con-ver-sa-tion to bre-ak the key. Fo-und and re-
+ad about at $\OML/pxmi/m/it/12 http \OT1/pxr/m/n/12 : \OML/pxmi/m/it/12 ==en:wi
+kipedia:org=wiki=A\OT1/pxr/m/n/12 5\OML/pxmi/m/it/12 =\OT1/pxr/m/n/12 1$ 
+ []
+
+[1.1{/usr/local/texlive/2012/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
 ]
 LaTeX Font Info:    Try loading font information for T1+pxtt on input line 124.
@@ -1169,65 +1211,41 @@ LaTeX Font Info:    Try loading font information for T1+pxtt on input line 124.
 
 (/usr/local/texlive/2012/texmf-dist/tex/latex/pxfonts/t1pxtt.fd
 File: t1pxtt.fd 2000/12/14 v1.0
-) [2.2] [3.3]
-LaTeX Font Info:    Try loading font information for OT1+pxr on input line 196.
-
-
-(/usr/local/texlive/2012/texmf-dist/tex/latex/pxfonts/ot1pxr.fd
-File: ot1pxr.fd 2000/12/14 v1.0
 )
-LaTeX Font Info:    Try loading font information for U+esvect on input line 196
-.
+Overfull \hbox (138.37552pt too wide) in paragraph at lines 164--164
+[]            \T1/pxtt/m/n/12 print "Plaintext is: "+ ''.join(plaintext)+" the 
+bruteforce text is: "+ ' '.join(newCiph)[] 
+ []
 
-(/usr/local/texlive/2012/texmf-dist/tex/latex/esvect/uesvect.fd
-File: uesvect.fd 
-)
-LaTeX Font Info:    Try loading font information for U+pxsya on input line 196.
-
-
-(/usr/local/texlive/2012/texmf-dist/tex/latex/pxfonts/upxsya.fd
-File: upxsya.fd 2000/12/14 v1.0
-)
-LaTeX Font Info:    Try loading font information for U+pxsyb on input line 196.
+[2.2]
+Overfull \hbox (12.37576pt too wide) in paragraph at lines 164--164
+[]    \T1/pxtt/m/n/12 plaintext = ['h','e','j','h','e','j','h','e','j','h','e',
+'j','h','e','j','h'][] 
+ []
 
 
-(/usr/local/texlive/2012/texmf-dist/tex/latex/pxfonts/upxsyb.fd
-File: utxsyb.fd 2000/12/14 v1.0
-)
-LaTeX Font Info:    Try loading font information for U+pxmia on input line 196.
-
-
-(/usr/local/texlive/2012/texmf-dist/tex/latex/pxfonts/upxmia.fd
-File: upxmia.fd 2000/12/14 v1.0
-)
-LaTeX Font Info:    Try loading font information for U+pxsyc on input line 196.
-
-
-(/usr/local/texlive/2012/texmf-dist/tex/latex/pxfonts/upxsyc.fd
-File: upxsyc.fd 2000/12/14 v1.0
-)
-Underfull \hbox (badness 10000) in paragraph at lines 198--203
+Underfull \hbox (badness 10000) in paragraph at lines 173--178
 
  []
 
-[4.4] [5.5] [6.6] [7.7]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 273.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 273.
+[3.3] [4.4] [5.5] [6.6]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 255.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 255.
  (./woorksheet 1.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 273.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 273.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 255.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 255.
 Package rerunfilecheck Info: File `"woorksheet 1".out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 273.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 255.
  ) 
 Here is how much of TeX's memory you used:
- 18508 strings out of 493488
- 317862 string characters out of 3141326
- 394859 words of memory out of 3000000
- 21367 multiletter control sequences out of 15000+200000
+ 18513 strings out of 493488
+ 317934 string characters out of 3141326
+ 395859 words of memory out of 3000000
+ 21373 multiletter control sequences out of 15000+200000
  29991 words of font info for 78 fonts, out of 3000000 for 9000
  957 hyphenation exceptions out of 8191
- 63i,12n,57p,463b,463s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 63i,12n,57p,570b,463s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/usr/local/texlive/2012/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
 exlive/2012/texmf-dist/fonts/type1/public/pxfonts/pxex.pfb></usr/local/texlive/
 2012/texmf-dist/fonts/type1/public/pxfonts/pxsy.pfb></usr/local/texlive/2012/te
@@ -1238,10 +1256,10 @@ e1/public/txfonts/t1xtt.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/urw
 /palatino/uplb8a.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/urw/palati
 no/uplr8a.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/urw/palatino/uplr
 i8a.pfb>
-Output written on "woorksheet 1.pdf" (7 pages, 71327 bytes).
+Output written on "woorksheet 1.pdf" (6 pages, 76979 bytes).
 PDF statistics:
- 101 PDF objects out of 1000 (max. 8388607)
- 82 compressed objects within 1 object stream
- 19 named destinations out of 1000 (max. 500000)
+ 93 PDF objects out of 1000 (max. 8388607)
+ 75 compressed objects within 1 object stream
+ 18 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 
