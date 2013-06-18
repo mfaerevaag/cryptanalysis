@@ -17,3 +17,4 @@ if __name__ == '__main__':
     u = str(random.getrandbits(28))
     print f(cipher)
     
+
