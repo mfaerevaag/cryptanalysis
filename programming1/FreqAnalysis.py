@@ -44,7 +44,7 @@ if __name__ == '__main__':
             continue
         output1.write("{0}: {2:.3%}\n".format(
                 key, value, float(value)/float(total[0])))
-        
+
     # Di- and trigrams
         for key, value in sorted(dict.iteritems(), 
                                  key=lambda (k, v): (v, k), reverse=True):

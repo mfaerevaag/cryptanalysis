@@ -11,36 +11,38 @@ Consists of two Python scripts:
      trigrams in a given file.
 
  * **ManualSubCipherTool.py**: Helps to manually decrypt a given
-     cypher by showing frequency analysis and comparing to the output
+     cipher by showing frequency analysis and comparing to the output
      for the previous mentioned script.
      
 ## Usage
 
 ### FreqAnalysis
 
-Store the text you want analyzed in a file called `input.txt` in the
+Store the text you want analyzed in a file in the
 same directory as the `FreqAnalysis.py`, the run the script with:
 
-    python FreqAnalysis.py
+    python FreqAnalysis.py input.txt
+    
+Where `input.txt` is your input file.
     
 The output will then be stored in two files:
 
  1. `output1.txt`: Letter frequencies
  2. `output2.txt`: Dia- and trigram frequencies
  
-*NOTE:* Out of the box contains `input.txt` a sample english text by
+*NOTE:* Out of the box contains `input.txt` a sample English text by
  [Project Gutenberg](www.gutenberg.org).
  
 ### ManualSubCipherTool
 
-With a given cyphertext, `CyPhErTeXt`, run the script with:
+With a given ciphertext, `CyPhErTeXt`, run the script with:
 
     python ManualSubCipherTool.py "CyPhErTeXt"
     
 You will now be prompted with an interactive command line interface
 where you can select options with the number keys on the you keyboard.
 
-*NOTE:* As noted under FreqAnalysis, it comes with a sample english
+*NOTE:* As noted under FreqAnalysis, it comes with a sample English
  word analysis. If your ciphertext is of a different language, you
  will have to run the FreqAnalysis tool of text in the wanted language.
 
