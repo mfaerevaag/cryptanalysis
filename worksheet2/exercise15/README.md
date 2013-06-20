@@ -5,6 +5,8 @@ By using a MD5 reduction function `f`, outputting a key-size of 20 bits, we
 have generated a Hallman's table with `2^16` chains, each with a length
 of `2^8`. That is, by iterating the reduction function 256 times.
 
+    f = Min 20 bits of MD5(s)
+
 ## Coverage
 
 In total our implementation covers ca. **300000** of the total
