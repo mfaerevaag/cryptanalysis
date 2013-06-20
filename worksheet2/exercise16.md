@@ -1,4 +1,5 @@
-# Exercise 16
+Exercise 16
+===========
 
 ## Hellman's vs Rainbow tables
 
