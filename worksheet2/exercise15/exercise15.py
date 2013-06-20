@@ -27,7 +27,8 @@ def md5_redux(s):
 def generate_list():
     """Generates a rainbow table"""
     dict = {}
-    order, keys_checked = []
+    order = []
+    keys_checked = []
     counter = 0
     
     for i in xrange(0, NUM_CHAINS - 1):
