@@ -1,25 +1,31 @@
+#
+# Project 2
+#
+# 01435 Practiacal Cryptanalysis
+# Technical University of Denmark
+
+# Markus Faerevaag              (s123692@student.dtu.dk)
+# Christian Mathias Rohde Kiaer (s123812@student.dtu.dk)
+# Jonathan Becktor              (s123094@student.dtu.dk)
+#
+
 from sys import argv
-from binascii import hexlify
 import os, md5, random, csv
 
-def a2bits(bytes):
-    """Converts a sequence of bytes to to string of bits
-    This function needs python >= 2.6"""
-    return bin(int(b"1" + hexlify(bytes), 16))[3:]
+BIT_SIZE = 28
+TABLE_NAME = "table.csv"
 
-def bits2a(b):
-    """Converts string of bits to its string representation"""
-    return ''.join(chr(int(''.join(x), 2)) for x in zip(*[iter(b)]*8))
 
-def f(s):
+def f(s, i):
     """Lowest 28 bits of MD5(s||u)"""
-    digest = md5.new(str(s) + str(u)).digest()
-    return int(a2bits(digest)[-28:], 2)
+    digest = int(md5.new(str(s)).hexdigest()[-BIT_SIZE/4:], 16)
+    result = (digest + i) % BIT_SIZE
+    return '0x' + str(result)
 
-def generateRainbow(s):
+def generate_table(s):
     """Generate Rainbow Table for key s"""
     dict = {"test":s, "asdf":0xdaffeee}
-    w = csv.writer(open("rainbow.csv", "w"))
+    w = csv.writer(open(TABLE_NAME, 'w'))
     for key, val in dict.items():
         w.writerow([key, val])
 
@@ -57,4 +63,4 @@ if __name__ == '__main__':
     print "Key: \t0x%x" % s
     print "f(s): \t0x%x" % f(s)
 
-    generateRainbow(s)
+    generate_table(s)
