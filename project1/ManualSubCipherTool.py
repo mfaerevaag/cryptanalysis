@@ -1,7 +1,6 @@
 from sys import argv
 import os
 
-
 def decryption(cipher):
 
 	found = False
@@ -87,7 +86,7 @@ def display_diagrams(cip):
 
 	for i in range(0, len(cip)):
 		for j in range(2,4):
-	    	    ch = str(''.join(cip[i:i+j]))
+                        ch = str(''.join(cip[i:i+j]))
                 if not ch.isalpha(): continue
 
                 if ch in dict:
@@ -97,9 +96,9 @@ def display_diagrams(cip):
                 count += 1
 
 	for key, value in sorted(dict.iteritems(), key=lambda (k,v): (v,k), reverse=True):
-   		 if len(key) <= 1: continue
-   		 print "{0}: {2:.3%}".format(key, value, 
-                                         float(value)/float(count))                               
+                if len(key) <= 1: continue
+                print "{0}: {2:.3%}".format(key, value, 
+                                            float(value)/float(count))                               
 	
 	print "English languge frequencies of tri/diagrams:"
 	print ''.join(input_grams.readlines()[:20])
