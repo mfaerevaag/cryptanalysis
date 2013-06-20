@@ -13,8 +13,9 @@
 from sys import argv
 import os
 
-def decryption(cipher):
 
+def decryption(cipher):
+        """Decrypt ciphertext"""
 	found = False
 
 	cip = list(cipher)
@@ -25,46 +26,50 @@ def decryption(cipher):
 
 	os.system('clear')
 
-	while (not found):
+	while not found:
 		print "Cipher:    " + ''.join(cip)
-		print "plaintext: " +''.join(plaintext)
+		print "Plaintext: " +''.join(plaintext)
 
-		print """What would you like to do? \n1) Assign plaintext to cipher \n2) Unassign plaintext 
-3) Letter frequencies in cipher/english \n4) Most frequent diagrams in cipher/text \n5) Finish decryption"""
+		print """What would you like to do?
+1) Assign plaintext to cipher
+2) Unassign plaintext 
+3) Letter frequencies in cipher/english
+4) Most frequent diagrams in cipher/text
+5) Finish decryption"""
 		
 		keyPressed = int(right_input(5))
 
-		if (keyPressed == 1):
+		if keyPressed == 1:
 			assignPlainToCipher(cip, plaintext)
-		elif(keyPressed == 2):
+		elif keyPressed == 2:
 			unasignPlain(plaintext)
-		elif(keyPressed == 3):
+		elif keyPressed == 3:
 			display_letter(cip)
-		elif(keyPressed == 4):
+		elif keyPressed == 4:
 			display_diagrams(cip)
-		elif(keyPressed == 5):
+		elif keyPressed == 5:
 			print "This is the plaintext you found: " + ''.join(plaintext)
 			found = True
 
 		os.system('clear')
 
 def assignPlainToCipher(cip, plaintext):
-	
+        """Assign plaintext character to corresponding ciphertext character"""	
 	keyToChange = str(raw_input("What cipher do you want to assign a plain character? ")).upper()
 	keyChanged = str(raw_input("What letter do you want to input? ")).lower()
 	for x in range(0, len(cip)):
-		if(cip[x] == keyToChange):
+		if cip[x] == keyToChange:
 			plaintext[x] = keyChanged
 
 def unasignPlain(plaintext):
-	
+	"""Unassign previous assigned plaintext to ciphertext"""
 	keyToChange = str(raw_input("What plaintext character do you want to unassign? ")).lower()
 	for x in range(0, len(plaintext)):
-		if(plaintext[x] == keyToChange):
+		if plaintext[x] == keyToChange:
 			plaintext[x] = '-'
 
 def right_input(i):
-
+        """Get input from user and validate"""
 	while True:
 		x = raw_input("Please enter a value: ")
 		try:
@@ -78,14 +83,14 @@ def right_input(i):
 	return x
 
 def remove_space(plaintext, cip):
-
+        """Remove whitespaces from ciphertext"""
 	for x in xrange(0,len(cip)):
-		if(cip[x] == ' '):
+		if cip[x] == ' ':
 			plaintext[x] = ' '
 	
 
 def display_diagrams(cip):
-
+        """Display dia and trigram frequencies in given ciphertext and compare to the given language's"""
 	input_grams = open("output2.txt", "r")
 	
 	print "Ciphers frequency of dia/trigrams:"	
@@ -119,7 +124,7 @@ def display_diagrams(cip):
 	input_grams.close()
 
 def display_letter(cip):
-
+        """Display letter frequencies in given ciphertext and compare to the given language's"""
 	input_frequency = open("output1.txt", "r")
 
 	dict = {}
@@ -145,21 +150,20 @@ def display_letter(cip):
 	raw_input("Press any key to continue")
 	input_frequency.close()
 
-if __name__ == '__main__':
-	
+if __name__ == '__main__':	
 	os.system('clear')
 
 	script, cipher = argv
 
 	print "Hello! \nWelcome to our decryption assistance tool! How may I help you?"
-	print "Press 1) for decryption"
-	print "Press 0) for exit"
+	print "1) Decrypt"
+	print "0) Exit"
 
 	keyPressed = int(right_input(1))
 
-	if(keyPressed == 0):
+	if keyPressed == 0:
 		exit
-	elif(keyPressed == 1):
+	elif keyPressed == 1:
 		decryption(cipher.upper())
 	else:
 		print "Exiting"

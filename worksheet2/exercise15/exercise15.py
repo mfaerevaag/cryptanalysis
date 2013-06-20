@@ -1,3 +1,15 @@
+#
+# Exercise 15
+# Worksheet 2
+#
+# 01435 Practiacal Cryptanalysis
+# Technical University of Denmark
+
+# Markus Faerevaag              (s123692@student.dtu.dk)
+# Christian Mathias Rohde Kiaer (s123812@student.dtu.dk)
+# Jonathan Becktor              (s123094@student.dtu.dk)
+#
+
 import time, csv, md5, random
 
 def md5_redux(s):
