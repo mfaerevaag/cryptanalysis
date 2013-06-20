@@ -1,3 +1,15 @@
+#
+# Manual Substitution Cipher Tool
+# Project 1
+#
+# 01435 Practiacal Cryptanalysis
+# Technical University of Denmark
+
+# Markus Faerevaag              (s123692@student.dtu.dk)
+# Christian Mathias Rohde Kiaer (s123812@student.dtu.dk)
+# Jonathan Becktor              (s123094@student.dtu.dk)
+#
+
 from sys import argv
 import os
 
