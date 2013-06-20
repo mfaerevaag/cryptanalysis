@@ -1,4 +1,4 @@
-import md5, random, time, csv
+import time, csv, md5, random
 
 def md5_redux(s):
     """Reduction method to throw away all exceeding output bits from MD5 hashfunction. Outputs 20bit"""
@@ -9,32 +9,30 @@ def generate_list():
     dict = {}
     order = []
     counter = 0
+    keys_checked = []
     for i in xrange(0, 2**16 - 1):
         red = hex(random.getrandbits(20))[:-1]
         red_start_point = red
         
         for x in xrange(0, 255):
             red = md5_redux(red)
-            
-        red_end_point = red
+            keys_checked.append(red)
 
-        # Skip if already in dict
-        if red_start_point in dict:
-            continue
-        else:
-            counter += 1
+        red_end_point = red
             
-        if counter % 5000 == 0:
-            print "Took i calls: %d and the counter is: %d" % (i, counter)
+        if i % 5000 == 0:
+           print "Took i calls: %d and the unique keys checked is: %d" % (i, len(set(keys_checked)))
 
         order.append(red_start_point)
         dict[red_start_point] = red_end_point
-        
+        counter += 1
+    print len(set(keys_checked))
+    print len(keys_checked)
     write_to_csv(dict, order)
 
 def write_to_csv(dict, order):
     """Writes the rainbow table to a .csv file"""
-    w = csv.writer(open("table1.csv", "w"))
+    w = csv.writer(open("table.csv", "w"))
     for key in order:
         value = dict[key]
         w.writerow([key, value])
