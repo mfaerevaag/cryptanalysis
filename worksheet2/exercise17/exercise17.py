@@ -16,7 +16,7 @@ BIT_SIZE   = 20
 NUM_CHAINS = 2**16
 CHAIN_LEN  = 2**8
 TABLE_NAME = "table.csv"
-
+LOG_FREQ   = 5000
 
 def md5_redux(s, i):
     """MD5 reduction function xor'ed with i.
@@ -31,29 +31,29 @@ def generate_table():
     dict = {}
     order = []
     counter = 0
+    keys_checked = []
     
     for i in xrange(0, NUM_CHAINS - 1):
         red = hex(random.getrandbits(20))[:-1]
         red_start_point = red
-        
+
         for x in xrange(0, CHAIN_LEN - 1):
             red = md5_redux(red, x)
-            
-        red_end_point = red
+            keys_checked.append(red)
 
-        # Skip if already in dict
-        if red_start_point in dict:
-            continue
-        else:
-            counter += 1
-            
-        if counter % 5000 == 0:
-            print "Took i calls: %d and the counter is: %d" % (i, counter)
+            red_end_point = red
+
+        if counter % LOG_FREQ == 0:
+            print "Took i calls: %d and the unique keys checked is: %d" % (i, len(set(keys_checked)))
 
         order.append(red_start_point)
         dict[red_start_point] = red_end_point
+        counter += 1
 
-        write_to_csv(dict, order)
+    print len(set(keys_checked))
+    print len(keys_checked)
+
+    write_to_csv(dict, order)
 
     
 def write_to_csv(dict, order):
