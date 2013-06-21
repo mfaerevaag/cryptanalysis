@@ -15,14 +15,11 @@ import os, md5, random, csv
 BIT_SIZE = 28
 CHAIN_LEN  = 2**10
 TABLE_NAME = "table.csv"
-LOG_FREQ   = 5000
-
 SERIAL_NO = 0123456
-#s = hex(random.getrandbits(BIT_SIZE))[:-1]
-s = random.getrandbits(BIT_SIZE)
-#s = "0x57c09f4"
+
+#s = random.getrandbits(BIT_SIZE)
+s = int("0x57c09f4", 16)
 u = int("0xdaffeda", 16)
-#u = "0xdaffeda"
 
 
 def cstring(msg, color):
@@ -46,8 +43,8 @@ def cstring(msg, color):
 def f(s, i=0):
     """Lowest 28 bits of (MD5(s||u) % i)"""    
     digest = md5.new(str(s) + str(u)).hexdigest()[:BIT_SIZE/4]
+    if i is 0: return int(digest, 16)
     result = (int(digest, 16) + i) % 2**BIT_SIZE
-#    return hex(result)
     return result
 
 
@@ -58,7 +55,6 @@ def read_table():
     with open(TABLE_NAME, 'rb') as csvfile:
         table = csv.reader(csvfile, delimiter=',', quotechar='|')
         for row in table:
-#            dict[str(row[0])] = str(row[1])
             dict[int(str(row[0]), 16)] = int(str(row[1]), 16)
 
     return dict
@@ -66,13 +62,17 @@ def read_table():
 
 def find_key(table, r):
     succ = [f(r)]
-    for i in xrange(0, CHAIN_LEN - 1):
+    for i in xrange(1, CHAIN_LEN - 1):
         succ.append(f(succ[i-1], i))
 
     for key, value in table.iteritems():
         if value in succ:
-            print "Key: 0x%x Value: 0x%x" % (key, value)
-            
+            print "\tKey: 0x%x Value: 0x%x" % (key, value)
+            for i in xrange(1, CHAIN_LEN - 1):
+                ss = f(key, i)
+                rs = f(ss)
+                if rs == r:
+                    print "\tWOW: 0x%x" % ss
 
     return -1
 
@@ -86,7 +86,7 @@ def main():
     print " Fob > Response:  0x%x" % r
 
     table = read_table()
-    print " Eve > Searching for key..."
+    print " Eve > Cracking..."
     
     key = find_key(table, r)
 
@@ -95,7 +95,7 @@ def main():
     else:
         print " Eve > %s: 0x%x" % (colored('Key found', 'green'), key)
 
-    print " Fob > Actual key was: 0x%x" % s
+    print "\tActual key: 0x%x" % s
 
     exit(1 if key is -1 else 0)
 
