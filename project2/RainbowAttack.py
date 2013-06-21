@@ -9,18 +9,27 @@
 # Jonathan Becktor              (s123094@student.dtu.dk)
 #
 
-from sys import argv
 import os, md5, random, csv
 
 BIT_SIZE = 28
+NUM_CHAINS = 2**16
+CHAIN_LEN  = 2**8
 TABLE_NAME = "table.csv"
+LOG_FREQ   = 5000
+
+
+def f(s):
+    """Lowest 28 bits of MD5(s||u)"""
+    digest = md5.new(str(s)).hexdigest()[-BIT_SIZE/4:]
+    return '0x' + digest
 
 
 def f(s, i):
-    """Lowest 28 bits of MD5(s||u)"""
+    """Lowest 28 bits of (MD5(s||u) % i)"""
     digest = int(md5.new(str(s)).hexdigest()[-BIT_SIZE/4:], 16)
     result = (digest + i) % BIT_SIZE
     return '0x' + str(result)
+
 
 def generate_table(s):
     """Generate Rainbow Table for key s"""
@@ -35,12 +44,12 @@ def getInput(i):
         x = raw_input("Please enter a value: ")
         try:
             keyPressed = int(x)
-            if(keyPressed <= i):
+            if keyPressed <= i:
                 break
             else:
                 print "Wrong input, try again"
         except:
-            print "Wrong input, try again"
+            print "Invalid input, try again"
     return x
 
 if __name__ == '__main__': 
