@@ -11,65 +11,79 @@
 
 import os, md5, random, csv
 
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+
+    def disable(self):
+        self.HEADER = ''
+        self.OKBLUE = ''
+        self.OKGREEN = ''
+        self.WARNING = ''
+        self.FAIL = ''
+        self.ENDC = ''
+
 BIT_SIZE = 28
 NUM_CHAINS = 2**16
 CHAIN_LEN  = 2**8
 TABLE_NAME = "table.csv"
 LOG_FREQ   = 5000
 
+SERIAL_NO = 0123456
+s = random.getrandbits(BIT_SIZE)
+u = int("0xdaffeda", 16)
+
 
 def f(s):
     """Lowest 28 bits of MD5(s||u)"""
-    digest = md5.new(str(s)).hexdigest()[-BIT_SIZE/4:]
-    return '0x' + digest
+    digest = md5.new(str(s) + str(u)).hexdigest()[:BIT_SIZE/4]
+    return int(digest, 16)
 
 
-def f(s, i):
-    """Lowest 28 bits of (MD5(s||u) % i)"""
-    digest = int(md5.new(str(s)).hexdigest()[-BIT_SIZE/4:], 16)
-    result = (digest + i) % BIT_SIZE
-    return '0x' + str(result)
+def fi(s, i):
+    """Lowest 28 bits of (MD5(s||u) % i)"""    
+    digest = md5.new(str(s) + str(u)).hexdigest()[:BIT_SIZE/4]
+    result = (int(digest, 16) + i) % BIT_SIZE
+    return result
 
 
-def generate_table(s):
-    """Generate Rainbow Table for key s"""
-    dict = {"test":s, "asdf":0xdaffeee}
-    w = csv.writer(open(TABLE_NAME, 'w'))
-    for key, val in dict.items():
-        w.writerow([key, val])
+def read_table():
+    """Read Rainbow Table from csv file"""
+    dict = {}
+
+    with open(TABLE_NAME, 'rb') as csvfile:
+        table = csv.reader(csvfile, delimiter=',', quotechar='|')
+        for row in table:
+            dict[int(row.pop(), 16)] = int(row.pop(), 16)
+
+    return dict
 
 
-def getInput(i):
-    while True:
-        x = raw_input("Please enter a value: ")
-        try:
-            keyPressed = int(x)
-            if keyPressed <= i:
-                break
-            else:
-                print "Wrong input, try again"
-        except:
-            print "Invalid input, try again"
-    return x
+def find_key(table, r):
+    for key, value in table.iteritems():
+        if value is hex(r):
+            print "> Eve > KEY FOUND: %s" % key
+            return key
 
-if __name__ == '__main__': 
-    os.system('clear')
+    print "> Eve > No key found"
 
-    argcount = 0
-    for arg in argv:
-        argcount += 1
-        
-    if argcount < 2:
-        print "Error: No key defined"
-        exit()
 
-    script, input = argv
+def main():
+    print "Fob > Hello, key fob no. %i is here!" % SERIAL_NO
+    
+    print "%sEve%s > Challenge:\t 0x%x" % (bcolors.WARNING, bcolors.ENDC, u)
 
-    #random.getrandbits(28)
-    s = int("0xabcdefe", 16)
-    u = int("0xdaffeee", 16)
+    r = f(s)
+    print "> Fob > Response:\t 0x%x" % r
 
-    print "Key: \t0x%x" % s
-    print "f(s): \t0x%x" % f(s)
+    table = read_table()
+    print "> Eve > Searching for key..."
+    find_key(table, r)
 
-    generate_table(s)
+
+if __name__ == '__main__':
+    main()
