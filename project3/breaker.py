@@ -12,6 +12,7 @@
 
 TIMEINT_START = 1245646800
 TIMEINT_END   = 1246251599
+CIPHERFILE    = "ciphertext_sheet3.txt"
 
 a = 69.069
 c = 5
@@ -22,16 +23,42 @@ def update(s):
     return (a * s + c) % m
 
 
-def main():
-    # Init s as s_0
-    s = TIMEINT_START
-
+def init_key(s):
     key = []
     for i in xrange(0, 15):
         s = update(s)
-        key.append(float.hex(s)[-6:-4])
+        key.append(int(float.hex(s)[-6:-4], 16))
 
-    print key
+    return key
+
+
+def load_cipher():
+    f = open(CIPHERFILE, 'r')
+    ciphertext = []
+    for line in f:
+        for c in line:
+            ciphertext.append(c)
+        
+    return ciphertext
+
+
+def encrypt(c, key, i):
+#    return ord(c)
+    return int(ord(c)) ^ key[i % 16]
+
+
+def main():
+    # Init s as s_0
+    key = init_key(TIMEINT_START)
+    
+   # print key
+
+    ciphertext = load_cipher()
+
+#    print ciphertext
+
+    for i in xrange(0, 10):
+        print encrypt(ciphertext[i], key[i], i)
 
 
 if __name__ == '__main__':
