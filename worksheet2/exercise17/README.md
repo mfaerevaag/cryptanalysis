@@ -1,4 +1,4 @@
-Exercise 15
+Exercise 17
 ===========
 
 By using a MD5 reduction function `f`, outputting a key-size of 20 bits, we
