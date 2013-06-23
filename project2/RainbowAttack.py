@@ -18,7 +18,7 @@ TABLE_NAME = "table.csv"
 SERIAL_NO = 0123456
 
 #s = random.getrandbits(BIT_SIZE)
-s = int("0x57c09f4", 16)
+s = int('0xcf496ab', 16)
 u = int("0xdaffeda", 16)
 
 
@@ -43,7 +43,6 @@ def cstring(msg, color):
 def f(s, i=0):
     """Lowest 28 bits of (MD5(s||u) % i)"""    
     digest = md5.new(str(s) + str(u)).hexdigest()[:BIT_SIZE/4]
-    if i is 0: return int(digest, 16)
     result = (int(digest, 16) + i) % 2**BIT_SIZE
     return result
 
@@ -51,7 +50,6 @@ def f(s, i=0):
 def read_table():
     """Read Rainbow Table from csv file"""
     dict = {}
-
     with open(TABLE_NAME, 'rb') as csvfile:
         table = csv.reader(csvfile, delimiter=',', quotechar='|')
         for row in table:
@@ -61,18 +59,22 @@ def read_table():
 
 
 def find_key(table, r):
+    """Search for matching respons in Rainbow-table"""
     succ = [f(r)]
     for i in xrange(1, CHAIN_LEN - 1):
         succ.append(f(succ[i-1], i))
 
     for key, value in table.iteritems():
         if value in succ:
-            print "\tKey: 0x%x Value: 0x%x" % (key, value)
-            for i in xrange(1, CHAIN_LEN - 1):
-                ss = f(key, i)
-                rs = f(ss)
+            print "\tCollition: 0x%x -> 0x%x" % (key, value)
+            ss = key
+            for i in xrange(0, CHAIN_LEN - 1):
+                rs = f(ss, i)
+#                print "0x%x" % rs,
                 if rs == r:
-                    print "\tWOW: 0x%x" % ss
+                    return ss
+                else:
+                    ss = rs
 
     return -1
 
@@ -97,7 +99,7 @@ def main():
 
     print "\tActual key: 0x%x" % s
 
-    exit(1 if key is -1 else 0)
+    return 1 if key is -1 else 0
 
 
 if __name__ == '__main__':
