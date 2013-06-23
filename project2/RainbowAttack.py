@@ -14,30 +14,12 @@ import os, md5, random, csv
 
 BIT_SIZE = 28
 CHAIN_LEN  = 2**10
-TABLE_NAME = "table.csv"
+TABLE_NAME = "rainbowproject2_long.csv"
 SERIAL_NO = 0123456
 
-#s = random.getrandbits(BIT_SIZE)
-s = int('0xcf496ab', 16)
+s = random.getrandbits(BIT_SIZE)
+#s = int('0xcf496ab', 16)
 u = int("0xdaffeda", 16)
-
-
-def cstring(msg, color):
-    c = ''
-    if color.lower() is 'red':
-        c = '033[91m'
-    elif color.lower() is 'yellow':
-        c = '033[93m'
-    elif color.lower() is 'green':
-        c = '033[92m'
-
-    return "%s %s %s" % (c, msg, c)
-
-
-#def f(s):
-#    """Lowest 28 bits of MD5(s||u)"""
-#    digest = md5.new(str(s) + str(u)).hexdigest()[:BIT_SIZE/4]
-#    return int(digest, 16)
 
 
 def f(s, i=0):
