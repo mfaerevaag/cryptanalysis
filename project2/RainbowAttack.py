@@ -14,7 +14,7 @@ import os, md5, random, csv
 
 BIT_SIZE = 28
 CHAIN_LEN  = 2**10
-TABLE_NAME = "rainbowproject2_long.csv"
+TABLE_NAME = 'table.csv' #"rainbowproject2_long.csv"
 SERIAL_NO = 0123456
 
 s = random.getrandbits(BIT_SIZE)
