@@ -34,7 +34,7 @@ def generate_table():
     counter = 0
     
     for i in xrange(0, NUM_CHAINS - 1):
-        red = hex(random.getrandbits(20))[:-1]
+        red = hex(random.getrandbits(BIT_SIZE))[:-1]
         red_start_point = red
 
         for x in xrange(0, CHAIN_LEN - 1):
