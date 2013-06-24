@@ -9,7 +9,8 @@
 # Jonathan Becktor              (s123094@student.dtu.dk)
 #
 
-import time
+from sys import argv
+import os, time
 
 START_DATE    = '2009-06-22 00:00:00'
 END_DATE      = '2009-06-28 23:59:59'
@@ -74,6 +75,16 @@ def check_plain(plain):
 
 
 def main():
+    # Check if enough argument were given
+    argcount = 0
+    for arg in argv:
+        argcount += 1    
+    if argcount < 2:
+        print "Error: No input file spesified"
+        return 1
+
+    script, inputfile = argv
+
     # Calculcate time interval
     date_format = '%Y-%m-%d %H:%M:%S'
     start = int(time.mktime(time.strptime(START_DATE, date_format))) - time.timezone
