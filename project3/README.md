@@ -24,9 +24,25 @@ This will produce a file called plaintext.txt, if it is successful.
 
 ## Logic
 
-The script essentially runs a smart brute-force attack. 
+The script essentially runs a **smart brute-force** attack:
 
-As we know the time period the file was decrypted, we take all the
-possible times and iterates over them. For each relevant time encrypt
-each letter with the given algorithm, and see if the result contains
-any of the words in our array of known plaintext words.
+ 1. We first calculate the relevant time interval the cipher was
+ created.
+ 2. Load ciphertext from file
+ 3. Start brute-force search for every possible time
+     1. Initialize key with current time / internal state
+     2. Encrypt every character in ciphertext with current state
+     3. Check if result contains any of the words in the array of
+     possible known plaintext elements.
+     4. If found, print key and write to file
+
+
+## Further Help
+
+For further help or explanation please contact one of us by mail and
+we'll be happy to help:
+
+ * Markus Faerevaag [s123692@student.dtu.dk](mailto:s123692@student.dtu.dk)
+ * Christian Mathias Rohde Kiaer [s123812@student.dtu.dk](mailto:s123812@student.dtu.dk)
+ * Jonathan Becktor [s123094@student.dtu.dk](mailto:s123094@student.dtu.dk)
+

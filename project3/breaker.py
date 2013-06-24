@@ -12,11 +12,17 @@
 from sys import argv
 import os, time
 
-START_DATE    = '2009-06-22 00:00:00'
-END_DATE      = '2009-06-28 23:59:59'
+# Given dates
+DATE_FORMAT     = '%Y-%m-%d %H:%M:%S'
+START_DATE      = '2009-06-22 00:00:00'
+END_DATE        = '2009-06-28 23:59:59'  
 
-CIPHERFILE    = "ciphertext_sheet3.txt"
-PLAINFILE     = 'plaintext.txt'
+# Given constants
+a = 69069
+c = 5
+m = 2**32
+
+PLAINFILE       = 'plaintext.txt'
 KNOWN_PLAINTEXT = ['Snowden',
                    'Obama',
                    'Biden',
@@ -27,10 +33,10 @@ KNOWN_PLAINTEXT = ['Snowden',
                    'Whistleblower',
                    'Hong Kong']
 
-# Given constants
-a = 69069
-c = 5
-m = 2**32
+
+def calc_time(date, date_format):
+    """Calculates seconds from UNIX epoch (1.1.1970) to given date"""
+    return int(time.mktime(time.strptime(date, date_format))) - time.timezone
 
 
 def update(s):
@@ -48,9 +54,9 @@ def init_key(s):
     return key
 
 
-def load_cipher():
+def load_cipher(inputfile):
     """Load ciphertext from file"""
-    f = open(CIPHERFILE, 'r')
+    f = open(inputfile, 'r')
     ciphertext = []
     for line in f:
         for c in line:
@@ -85,22 +91,24 @@ def main():
 
     script, inputfile = argv
 
-    # Calculcate time interval
-    date_format = '%Y-%m-%d %H:%M:%S'
-    start = int(time.mktime(time.strptime(START_DATE, date_format))) - time.timezone
-    end = int(time.mktime(time.strptime(END_DATE, date_format))) - time.timezone
-
+    # Calculate times
+    start = calc_time(START_DATE, DATE_FORMAT)
+    end = calc_time(END_DATE, DATE_FORMAT)
+    
+    # Load ciphertext from inputfile
+    ciphertext = load_cipher(inputfile)
+    
     # Start bruteforce search
     for i in xrange(start, end):
         key = init_key(i)
 
-        ciphertext = load_cipher()
-
+        # Encrypt each character add append to string
         plain = ''
         for j in xrange(0, len(ciphertext)-1):
             c = chr(encrypt(ciphertext[j], key, j))
             plain += c
 
+        ## See if string contains any of known plaintexts
         if check_plain(plain):
             print "Found plaintext after %i tries!" % (i - start)
             print "Key: ",
