@@ -45,4 +45,3 @@ we'll be happy to help:
  * Markus Faerevaag [s123692@student.dtu.dk](mailto:s123692@student.dtu.dk)
  * Christian Mathias Rohde Kiaer [s123812@student.dtu.dk](mailto:s123812@student.dtu.dk)
  * Jonathan Becktor [s123094@student.dtu.dk](mailto:s123094@student.dtu.dk)
-
