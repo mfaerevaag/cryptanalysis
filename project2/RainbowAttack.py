@@ -10,22 +10,22 @@
 #
 
 from termcolor import colored
-import os, md5, random, csv
+import md5, random, csv
 
 BIT_SIZE = 28
 CHAIN_LEN  = 2**10
-TABLE_NAME = 'table.csv' #"rainbowproject2_long.csv"
-SERIAL_NO = 0123456
+TABLE_NAME = "table.csv"
+SERIAL_NO = "0123456"
 
-s = random.getrandbits(BIT_SIZE)
-#s = int('0xcf496ab', 16)
-u = int("0xdaffeda", 16)
+#s = hex(random.getrandbits(BIT_SIZE))[:-1]
+s ='0xebd305f'
+u = "daffeda"
 
 
 def f(s, i=0):
     """Lowest 28 bits of (MD5(s||u) % i)"""    
-    digest = md5.new(str(s) + str(u)).hexdigest()[:BIT_SIZE/4]
-    result = (int(digest, 16) + i) % 2**BIT_SIZE
+    digest = '0x' + md5.new(str(s) + str(u)).hexdigest()[-BIT_SIZE/4:]
+    result = hex((int(digest, 16) + i) % 2**BIT_SIZE)
     return result
 
 
@@ -35,39 +35,36 @@ def read_table():
     with open(TABLE_NAME, 'rb') as csvfile:
         table = csv.reader(csvfile, delimiter=',', quotechar='|')
         for row in table:
-            dict[int(str(row[0]), 16)] = int(str(row[1]), 16)
-
+            dict[str(row[0])] = str(row[1])
     return dict
 
 
 def find_key(table, r):
     """Search for matching respons in Rainbow-table"""
-    succ = [f(r)]
-    for i in xrange(1, CHAIN_LEN - 1):
+    succ = [r]
+    for i in xrange(0, CHAIN_LEN):
         succ.append(f(succ[i-1], i))
 
     for key, value in table.iteritems():
         if value in succ:
-            print "\tCollition: 0x%x -> 0x%x" % (key, value)
+            print "\tCollition: %s -> %s" % (key, value)
+            print succ.index(value)
             ss = key
-            for i in xrange(0, CHAIN_LEN - 1):
+            for i in xrange(0, succ.index(value) - 1):
                 rs = f(ss, i)
-#                print "0x%x" % rs,
-                if rs == r:
-                    return ss
-                else:
-                    ss = rs
-
+#                print "%s" % rs,
+                ss = rs
+            print rs
     return -1
 
 
 def main():
-    print " Fob > Hello, key fob no. %i is here!" % SERIAL_NO
+    print " Fob > Hello, key fob no. %s is here!" % SERIAL_NO
     
-    print " Eve > Challenge: 0x%x" % u
+    print " Eve > Challenge: 0x%s" % u
 
     r = f(s)
-    print " Fob > Response:  0x%x" % r
+    print " Fob > Response:  %s" % r
 
     table = read_table()
     print " Eve > Cracking..."
@@ -77,11 +74,10 @@ def main():
     if key is -1:
         print " Eve > %s" % colored('No key found!', 'red')
     else:
-        print " Eve > %s: 0x%x" % (colored('Key found', 'green'), key)
+        print " Eve > %s: %s" % (colored('Key found', 'green'), key)
 
-    print "\tActual key: 0x%x" % s
+    print "\tActual key: %s" % s
 
-    return 1 if key is -1 else 0
 
 
 if __name__ == '__main__':

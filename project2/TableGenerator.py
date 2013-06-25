@@ -9,7 +9,7 @@
 # Jonathan Becktor              (s123094@student.dtu.dk)
 #
 
-import os, md5, random, csv, time
+import md5, random, csv, time
 
 BIT_SIZE   = 28
 NUM_CHAINS = 2**18
@@ -17,47 +17,42 @@ CHAIN_LEN  = 2**10
 TABLE_NAME = "table.csv"
 LOG_FREQ   = 5000
 
-u = int("0xdaffeda", 16)
+u = "daffeda"
 
 
 def md5_redux(s, i=0):
     """Lowest 28 bits of (MD5(s||u) % i)"""    
-    digest = md5.new(str(s) + str(u)).hexdigest()[:BIT_SIZE/4]
-    result = (int(digest, 16) + i) % 2**BIT_SIZE
+    digest = '0x' + md5.new(str(s) + str(u)).hexdigest()[-BIT_SIZE/4:]
+    result = hex((int(digest, 16) + i) % 2**BIT_SIZE)
     return result
 
 
 def generate_table():
     """Generates a rainbow table"""
     dict = {}
-    order = []
-    counter = 0
+
+    for i in xrange(0, NUM_CHAINS):
+        red = hex(random.getrandbits(28))[:-1]
     
-    for i in xrange(0, NUM_CHAINS - 1):
-        red = hex(random.getrandbits(BIT_SIZE))[:-1]
         red_start_point = red
 
-        for x in xrange(0, CHAIN_LEN - 1):
+        for x in xrange(0, CHAIN_LEN):
             red = md5_redux(red, x)
 
         red_end_point = red
 
-        if counter % LOG_FREQ == 0:
-            print "Took i calls: %d keys: %d" % (i, counter)
-
-        order.append(red_start_point)
+        if i % LOG_FREQ == 0:
+            print "Took i calls: %d" % (i)
         dict[red_start_point] = red_end_point
-        counter += 1
 
-    write_to_csv(dict, order)
+    write_to_csv(dict)
 
     
-def write_to_csv(dict, order):
+def write_to_csv(dict):
     """Writes the rainbow table to a .csv file"""
     w = csv.writer(open(TABLE_NAME, 'w'))
-    for key in order:
-        value = dict[key]
-        w.writerow([key, hex(value)])
+    for key, value in dict.items():
+        w.writerow([key, value])
 
 
 def main():
