@@ -15,7 +15,9 @@ import os
 
 
 def decryption(cipher):
-        """Decrypt ciphertext"""
+        """Menu for assisting in decryption of ciphertext.
+        Gives you possibilities for assigning plaintext letters to ciphertext letters,
+        unassign letters in plaintext and display most frequent mono/dia/tri"""
 	found = False
 
 	cip = list(cipher)
@@ -54,7 +56,10 @@ def decryption(cipher):
 		os.system('clear')
 
 def assignPlainToCipher(cip, plaintext):
-        """Assign plaintext character to corresponding ciphertext character"""	
+        """Assign plaintext character to corresponding ciphertext character.
+        First input to console is the ciphertext letter you want to assign a new letter to.
+        Second input is the plaintext letter you want to assign to a ciphertext letter.
+        Then loops over entire cipher change every character."""	
 	keyToChange = str(raw_input("What cipher do you want to assign a plain character? ")).upper()
 	keyChanged = str(raw_input("What letter do you want to input? ")).lower()
 	for x in range(0, len(cip)):
@@ -62,14 +67,18 @@ def assignPlainToCipher(cip, plaintext):
 			plaintext[x] = keyChanged
 
 def unasignPlain(plaintext):
-	"""Unassign previous assigned plaintext to ciphertext"""
+	"""Unassign previous assigned plaintext to ciphertext
+    Input the plaintext character you want to unasign.
+    Loops through entire plaintext to remove every character."""
 	keyToChange = str(raw_input("What plaintext character do you want to unassign? ")).lower()
 	for x in range(0, len(plaintext)):
 		if plaintext[x] == keyToChange:
 			plaintext[x] = '-'
 
 def right_input(i):
-        """Get input from user and validate"""
+        """Get input from user and validate.
+        Function to make sure the right input is given.
+        Right inputs is between 0 and the given i. Gives user another try if wrong key is pressed"""
 	while True:
 		x = raw_input("Please enter a value: ")
 		try:
@@ -83,19 +92,21 @@ def right_input(i):
 	return x
 
 def remove_space(plaintext, cip):
-        """Remove whitespaces from ciphertext"""
+        """Remove whitespaces from ciphertext. Loops over the ciphertext
+        and sets corresponding plaintext position as whitespace."""
 	for x in xrange(0,len(cip)):
 		if cip[x] == ' ':
 			plaintext[x] = ' '
 	
 
 def display_diagrams(cip):
-        """Display dia and trigram frequencies in given ciphertext and compare to the given language's"""
+        """Display dia and trigram frequencies in given ciphertext and compare to the given language's.
+        Opens the output2.txt from created from the FreqAnalysis tool. Runs through the cipher text
+        storing dia/trigrams in a dictonary. The ammount of appearances and the tri/diagram is then saved and printed.
+        Then prints the most frequent dia/trigams from the english language"""
 	input_grams = open("output2.txt", "r")
 	
 	print "Ciphers frequency of dia/trigrams:"	
-	
-	print "Ciphers frequency of letters:"
 
 	dict = {}
 
@@ -124,7 +135,10 @@ def display_diagrams(cip):
 	input_grams.close()
 
 def display_letter(cip):
-        """Display letter frequencies in given ciphertext and compare to the given language's"""
+        """Display letter frequencies in given ciphertext and compare to the given language's
+        Opens the output1.txt generated from the FreqAnalysis tool. Runs through the cipher text and stores each letter and the ammount of times
+        it's present in the text. Prints the character and corresponding ammount. Then outputs the frequencies of the english language
+        from output2.txt"""
 	input_frequency = open("output1.txt", "r")
 
 	dict = {}
@@ -151,19 +165,21 @@ def display_letter(cip):
 	input_frequency.close()
 
 if __name__ == '__main__':	
-	os.system('clear')
+    """Tool for manual assitance in decryption of a substitution ciphertext.
+    Possible to get analysis of both ciphertext and from the english language"""
+    os.system('clear')
 
-	script, cipher = argv
+    script, cipher = argv
 
-	print "Hello! \nWelcome to our decryption assistance tool! How may I help you?"
-	print "1) Decrypt"
-	print "0) Exit"
+    print "Hello! \nWelcome to our decryption assistance tool! How may I help you?"
+    print "1) Decrypt"
+    print "0) Exit"
 
-	keyPressed = int(right_input(1))
+    keyPressed = int(right_input(1))
 
-	if keyPressed == 0:
+    if keyPressed == 0:
 		exit
-	elif keyPressed == 1:
+    elif keyPressed == 1:
 		decryption(cipher.upper())
-	else:
+    else:
 		print "Exiting"

@@ -2,6 +2,10 @@ from sys import argv
 import os
 
 if __name__ == '__main__':
+    """Tool for analysing an input text, and outputting a frequency
+    analysis of mono/dia/trigrams in a given input text. Takes the input file and runs through it, saving the
+    ammount of times a character and dia/trigrams is present. Then outputs the given values to 2 .txt files.
+    If a british english text is given as a input file, a representation close to the frequency of letters of the english alphabet should be outputtet."""
     os.system('clear')
 
     # Check if enough argument were given
@@ -10,7 +14,6 @@ if __name__ == '__main__':
         argcount += 1    
     if argcount < 2:
         print "Error: No input file spesified"
-        exit()
 
     script, inputfile = argv
 
