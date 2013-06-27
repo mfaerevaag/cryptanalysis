@@ -30,7 +30,35 @@ Rainbowtables are a time memory tradeoff attack, wich makes it possible to crack
 
 The reduction functions of a rainbow table are all different (one per column), but are generally built as an extension of a single reduction function.
 
-In our example we use the reduction function f(s) = (s + 1) % BITSIZE.  
+In our example we use the reduction function f(s) = (s + 1) % BITSIZE. We use the following bit of code to generate the table:
+
+    def generate_table():
+    """Generates a rainbow table.
+    Fills a hashtable with random generated start points and their corresponding endpoints.
+    Runs through the given number of chains and length of each chain. Ends of with writing the dictonary to a .csv file."""
+    dict = {}
+
+    #Runs the loop through the number of chains
+    for i in xrange(0, NUM_CHAINS):
+        red = hex(random.randint(16777216, 268435455))
+
+        #Random generated startpoint.
+        red_start_point = red
+
+        #Computes the end point, by hashing the start point through the number of chains.
+        for x in xrange(0, CHAIN_LEN):
+            cipher = md5_hash(red)
+            red = reduction(cipher, x) 
+
+        #Endpoint for storage in table.
+        red_end_point = red
+
+        #Prints ammount of times loop has run.
+        if i % LOG_FREQ == 0:
+            print "Took i calls: %d" % (i)
+        dict[red_start_point] = red_end_point
+
+    write_to_csv(dict)
 
 ## Usage
 
