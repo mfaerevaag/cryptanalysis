@@ -11,36 +11,45 @@
 
 import md5, random, csv, time
 
+#Constants used to create the table.
 BIT_SIZE   = 28
 NUM_CHAINS = 2**18
 CHAIN_LEN  = 2**10
-TABLE_NAME = "table.csv"
+TABLE_NAME = "tabletest.csv"
 LOG_FREQ   = 5000
-
+#Challenge key u
 u = "daffeda"
 
+def reduction(cipher, iteration):
+    """Lowest 28 bits of (MD5(s||u) % i)""" 
+    return  hex((int(cipher, 16) + iteration) % 2**BIT_SIZE)[-BIT_SIZE/4 - 3: -1]
 
-def md5_redux(s, i=0):
-    """Lowest 28 bits of (MD5(s||u) % i)"""    
-    digest = '0x' + md5.new(str(s) + str(u)).hexdigest()[-BIT_SIZE/4:]
-    result = hex((int(digest, 16) + i) % 2**BIT_SIZE)
-    return result
-
+def md5_hash(s):
+    """Hashes the original string and returns a hex string"""
+    return '0x' + md5.new(str(s) + str(u)).hexdigest()[:-1]
 
 def generate_table():
-    """Generates a rainbow table"""
+    """Generates a rainbow table.
+    Fills a hashtable with random generated start points and their corresponding endpoints.
+    Runs through the given number of chains and length of each chain. Ends of with writing the dictonary to a .csv file."""
     dict = {}
 
+    #Runs the loop through the number of chains
     for i in xrange(0, NUM_CHAINS):
-        red = hex(random.getrandbits(28))[:-1]
-    
+        red = hex(random.randint(16777216, 268435455))
+
+        #Random generated startpoint.
         red_start_point = red
 
+        #Computes the end point, by hashing the start point through the number of chains.
         for x in xrange(0, CHAIN_LEN):
-            red = md5_redux(red, x)
+            cipher = md5_hash(red)
+            red = reduction(cipher, x) 
 
+        #Endpoint for storage in table.
         red_end_point = red
 
+        #Prints ammount of times loop has run.
         if i % LOG_FREQ == 0:
             print "Took i calls: %d" % (i)
         dict[red_start_point] = red_end_point
@@ -56,14 +65,12 @@ def write_to_csv(dict):
 
 
 def main():
+    """Tool for generating a rainbowtable from given constants."""
     start = time.clock()
-    
-    generate_table()
-    
+    generate_table()    
     end = time.clock()
     print "Took: ", (end - start), " s"
     
-
 if __name__ == '__main__':
     main()
     
