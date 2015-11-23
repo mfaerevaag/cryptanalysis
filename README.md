@@ -1,7 +1,7 @@
 CryptoAnalysis
 ==============
 
-01435 Practical Cryptoanalysis
+Practical Cryptoanalysis
 
 Includes:
 * Worksheet 1
